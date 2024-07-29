@@ -1,4 +1,4 @@
-﻿using DiscordRPC;
+using DiscordRPC;
 
 namespace Bloxstrap.Integrations
 {
@@ -190,8 +190,12 @@ namespace Bloxstrap.Integrations
             }
 
             string icon = "roblox";
+            string smallImageText = "Roblox";
+            string smallImage = "roblox";
+            
             long placeId = _activityWatcher.ActivityPlaceId;
-
+            string userId = _activityWatcher.ActivityUserId;
+            
             App.Logger.WriteLine(LOG_IDENT, $"Setting presence for Place ID {placeId}");
 
             var universeIdResponse = await Http.GetJson<UniverseIdResponse>($"https://apis.roblox.com/universes/v1/places/{placeId}/universe");
@@ -231,6 +235,32 @@ namespace Bloxstrap.Integrations
                 App.Logger.WriteLine(LOG_IDENT, $"Got Universe thumbnail as {icon}");
             }
 
+            if (App.Settings.Prop.AccountShownOnProfile)
+            {
+                var userPfpResponse = await Http.GetJson<ApiArrayResponse<ThumbnailResponse>>($"https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds={userId}&size=180x180&format=Png&isCircular=false"); //we can remove '-headshot' from the url if we want a full avatar picture
+                if (userPfpResponse is null || !userPfpResponse.Data.Any())
+                {
+                    App.Logger.WriteLine(LOG_IDENT, "Could not get user thumbnail info!");
+                }
+                else
+                {
+                    smallImage = userPfpResponse.Data.ToArray()[0].ImageUrl;
+                    App.Logger.WriteLine(LOG_IDENT, $"Got user thumbnail as {smallImage}");
+                }
+                
+                var userInfoResponse = await Http.GetJson<UserInfoResponse>($"https://users.roblox.com/v1/users/{userId}");
+                if (userInfoResponse is null)
+                {
+                    App.Logger.WriteLine(LOG_IDENT, "Could not get user info!");
+                } 
+                else
+                {
+                    smallImageText = userInfoResponse.DisplayName + $" (@{userInfoResponse.Username})"; //example: john doe (@johndoe)
+                    App.Logger.WriteLine(LOG_IDENT, $"Got user info as {smallImageText}");
+                }
+            }
+
+            
             List<Button> buttons = new();
 
             if (!App.Settings.Prop.HideRPCButtons && _activityWatcher.ActivityServerType == ServerType.Public)
@@ -274,8 +304,8 @@ namespace Bloxstrap.Integrations
                 {
                     LargeImageKey = icon,
                     LargeImageText = universeDetails.Name,
-                    SmallImageKey = "roblox",
-                    SmallImageText = "Roblox"
+                    SmallImageKey = smallImage,
+                    SmallImageText = smallImageText
                 }
             };
 

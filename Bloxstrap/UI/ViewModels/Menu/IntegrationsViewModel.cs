@@ -99,7 +99,9 @@ namespace Bloxstrap.UI.ViewModels.Menu
                 if (!value)
                 {
                     DiscordActivityJoinEnabled = value;
+                    DiscordAccountOnProfile = value;
                     OnPropertyChanged(nameof(DiscordActivityJoinEnabled));
+                    OnPropertyChanged(nameof(DiscordAccountOnProfile));
                 }
             }
         }
@@ -108,6 +110,12 @@ namespace Bloxstrap.UI.ViewModels.Menu
         {
             get => !App.Settings.Prop.HideRPCButtons;
             set => App.Settings.Prop.HideRPCButtons = !value;
+        }
+
+        public bool DiscordAccountOnProfile
+        {
+            get => App.Settings.Prop.AccountShownOnProfile;
+            set => App.Settings.Prop.AccountShownOnProfile = value;
         }
 
         public bool DisableAppPatchEnabled
