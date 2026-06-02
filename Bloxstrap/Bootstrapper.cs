@@ -958,23 +958,52 @@ namespace Bloxstrap
         {
             const string LOG_IDENT = "Bootstrapper::KillRobloxInstances";
 
+            List<string> failures = new List<string>();
             List<Process> processes = new List<Process>();
             processes.AddRange(Process.GetProcessesByName(AppData.ProcessName));
             processes.AddRange(Process.GetProcessesByName("RobloxCrashHandler")); // roblox studio doesnt depend on crash handler being open, so this should be fine
 
             foreach (Process process in processes)
             {
+                int processId = 0;
+                string processName = "unknown";
+
                 try
                 {
+                    processId = process.Id;
+                    processName = process.ProcessName;
+
+                    if (process.HasExited)
+                        continue;
+
                     process.Kill();
-                    process.WaitForExit(5000);
+
+                    if (!process.WaitForExit(5000))
+                    {
+                        string message = $"{processName} ({processId}) did not exit within 5 seconds";
+                        App.Logger.WriteLine(LOG_IDENT, message);
+                        failures.Add(message);
+                    }
+                }
+                catch (InvalidOperationException) when (process.HasExited)
+                {
+                    App.Logger.WriteLine(LOG_IDENT, $"{processName} ({processId}) already exited");
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.WriteLine(LOG_IDENT, $"Failed to close process {process.Id}");
+                    string message = $"Failed to close process {processName} ({processId})";
+                    App.Logger.WriteLine(LOG_IDENT, message);
                     App.Logger.WriteException(LOG_IDENT, ex);
+                    failures.Add($"{message}: {ex.Message}");
+                }
+                finally
+                {
+                    process.Dispose();
                 }
             }
+
+            if (failures.Any())
+                throw new InvalidOperationException($"Failed to close running Roblox processes: {String.Join("; ", failures)}");
         }
 
         private async Task GracefullyCloseRobloxInstances()
@@ -1039,7 +1068,7 @@ namespace Bloxstrap
                 // get a fully clean install
                 if (Directory.Exists(_latestVersionDirectory))
                 {
-                    const int maxDeleteRetries = 5;
+                    const int maxDeleteRetries = 10;
                     for (int i = 0; i < maxDeleteRetries; i++)
                     {
                         try
@@ -1053,7 +1082,12 @@ namespace Bloxstrap
                             App.Logger.WriteException(LOG_IDENT, ex);
 
                             if (i < maxDeleteRetries - 1)
+                            {
                                 await Task.Delay(1000, _cancelTokenSource.Token);
+                                continue;
+                            }
+
+                            throw new IOException($"Failed to delete the existing Roblox version directory after {maxDeleteRetries} attempts. It may still be locked by Roblox, antivirus, or another security tool.", ex);
                         }
                     }
                 }
@@ -1641,7 +1675,7 @@ namespace Bloxstrap
             fastZip.RestoreDateTimeOnExtract = false;
             fastZip.RestoreAttributesOnExtract = false;
 
-            const int maxExtractRetries = 3;
+            const int maxExtractRetries = 10;
             for (int i = 0; i < maxExtractRetries; i++)
             {
                 try
@@ -1653,7 +1687,15 @@ namespace Bloxstrap
                 {
                     App.Logger.WriteLine(LOG_IDENT, $"Extraction failed (attempt {i + 1}/{maxExtractRetries}), retrying...");
                     App.Logger.WriteException(LOG_IDENT, ex);
+
+                    if (Directory.Exists(packageFolder))
+                        Filesystem.AssertReadOnlyDirectory(packageFolder);
+
                     Thread.Sleep(1000);
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    throw new UnauthorizedAccessException($"Failed to extract {package.Name} because access to the Roblox version directory was denied. Roblox, antivirus, or another security tool may still be locking the files.", ex);
                 }
             }
 
