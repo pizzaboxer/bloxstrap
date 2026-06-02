@@ -967,6 +967,7 @@ namespace Bloxstrap
                 try
                 {
                     process.Kill();
+                    process.WaitForExit(5000);
                 }
                 catch (Exception ex)
                 {
@@ -1032,17 +1033,28 @@ namespace Bloxstrap
                 if (_cancelTokenSource.IsCancellationRequested)
                     return;
 
+                // give processes time to fully release file handles
+                await Task.Delay(1000, _cancelTokenSource.Token);
+
                 // get a fully clean install
                 if (Directory.Exists(_latestVersionDirectory))
                 {
-                    try
+                    const int maxDeleteRetries = 5;
+                    for (int i = 0; i < maxDeleteRetries; i++)
                     {
-                        Directory.Delete(_latestVersionDirectory, true);
-                    }
-                    catch (Exception ex)
-                    {
-                        App.Logger.WriteLine(LOG_IDENT, "Failed to delete the latest version directory");
-                        App.Logger.WriteException(LOG_IDENT, ex);
+                        try
+                        {
+                            Directory.Delete(_latestVersionDirectory, true);
+                            break;
+                        }
+                        catch (Exception ex)
+                        {
+                            App.Logger.WriteLine(LOG_IDENT, $"Failed to delete the latest version directory (attempt {i + 1}/{maxDeleteRetries})");
+                            App.Logger.WriteException(LOG_IDENT, ex);
+
+                            if (i < maxDeleteRetries - 1)
+                                await Task.Delay(1000, _cancelTokenSource.Token);
+                        }
                     }
                 }
             }
@@ -1053,6 +1065,9 @@ namespace Bloxstrap
                 SetStatus(Strings.Bootstrapper_Status_Upgrading);
 
             Directory.CreateDirectory(_latestVersionDirectory);
+
+            // strip read-only attributes from any leftover files in the version directory
+            Filesystem.AssertReadOnlyDirectory(_latestVersionDirectory);
 
             var cachedPackageHashes = Directory.GetFiles(Paths.Downloads).Select(x => Path.GetFileName(x));
 
@@ -1616,13 +1631,31 @@ namespace Bloxstrap
                 fileFilter = String.Join(';', regexList);
             }
 
+            // strip read-only attributes from any existing files before overwriting
+            if (Directory.Exists(packageFolder))
+                Filesystem.AssertReadOnlyDirectory(packageFolder);
+
             App.Logger.WriteLine(LOG_IDENT, $"Extracting {package.Name}...");
 
             var fastZip = new FastZip(_fastZipEvents);
             fastZip.RestoreDateTimeOnExtract = false;
             fastZip.RestoreAttributesOnExtract = false;
 
-            fastZip.ExtractZip(package.DownloadPath, packageFolder, fileFilter);
+            const int maxExtractRetries = 3;
+            for (int i = 0; i < maxExtractRetries; i++)
+            {
+                try
+                {
+                    fastZip.ExtractZip(package.DownloadPath, packageFolder, fileFilter);
+                    break;
+                }
+                catch (Exception ex) when (i < maxExtractRetries - 1)
+                {
+                    App.Logger.WriteLine(LOG_IDENT, $"Extraction failed (attempt {i + 1}/{maxExtractRetries}), retrying...");
+                    App.Logger.WriteException(LOG_IDENT, ex);
+                    Thread.Sleep(1000);
+                }
+            }
 
             App.Logger.WriteLine(LOG_IDENT, $"Finished extracting {package.Name}");
         }
