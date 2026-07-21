@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using Wpf.Ui.Appearance;
 
-namespace Bloxstrap.UI.ViewModels.Bootstrapper
+namespace LumenRX.UI.ViewModels.Bootstrapper
 {
     public class FluentDialogViewModel : BootstrapperDialogViewModel
     {

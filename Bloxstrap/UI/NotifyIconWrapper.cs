@@ -1,8 +1,8 @@
-﻿using Bloxstrap.Integrations;
-using Bloxstrap.UI.Elements.About;
-using Bloxstrap.UI.Elements.ContextMenu;
+﻿using LumenRX.Integrations;
+using LumenRX.UI.Elements.About;
+using LumenRX.UI.Elements.ContextMenu;
 
-namespace Bloxstrap.UI
+namespace LumenRX.UI
 {
     public class NotifyIconWrapper : IDisposable
     {

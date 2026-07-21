@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Enums.FlagPresets
+﻿namespace LumenRX.Enums.FlagPresets
 {
     public enum MSAAMode
     {

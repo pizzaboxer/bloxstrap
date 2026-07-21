@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace Bloxstrap.Utility
+namespace LumenRX.Utility
 {
     public static class MD5Hash
     {

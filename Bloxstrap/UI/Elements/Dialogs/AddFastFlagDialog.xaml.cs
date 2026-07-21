@@ -1,8 +1,8 @@
 ﻿using Microsoft.Win32;
 using System.Windows;
-using Bloxstrap.Resources;
+using LumenRX.Resources;
 
-namespace Bloxstrap.UI.Elements.Dialogs
+namespace LumenRX.UI.Elements.Dialogs
 {
     /// <summary>
     /// Interaction logic for AddFastFlagDialog.xaml

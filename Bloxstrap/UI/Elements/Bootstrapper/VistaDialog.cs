@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms;
 
-using Bloxstrap.UI.Elements.Bootstrapper.Base;
+using LumenRX.UI.Elements.Bootstrapper.Base;
 
-namespace Bloxstrap.UI.Elements.Bootstrapper
+namespace LumenRX.UI.Elements.Bootstrapper
 {
     // https://youtu.be/h0_AL95Sc3o?t=48
 

@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.UI.Elements.Bootstrapper
+﻿namespace LumenRX.UI.Elements.Bootstrapper
 {
     partial class VistaDialog
     {

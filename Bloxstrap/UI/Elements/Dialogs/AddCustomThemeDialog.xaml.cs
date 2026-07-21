@@ -1,10 +1,10 @@
-﻿using Bloxstrap.UI.Elements.Base;
-using Bloxstrap.UI.ViewModels.Dialogs;
+﻿using LumenRX.UI.Elements.Base;
+using LumenRX.UI.ViewModels.Dialogs;
 using Microsoft.Win32;
 using System.IO.Compression;
 using System.Windows;
 
-namespace Bloxstrap.UI.Elements.Dialogs
+namespace LumenRX.UI.Elements.Dialogs
 {
     /// <summary>
     /// Interaction logic for AddCustomThemeDialog.xaml

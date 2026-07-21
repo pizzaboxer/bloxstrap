@@ -1,15 +1,15 @@
-﻿<base:WpfUiWindow x:Class="Bloxstrap.UI.Elements.Dialogs.LaunchMenuDialog"
+﻿<base:WpfUiWindow x:Class="LumenRX.UI.Elements.Dialogs.LaunchMenuDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-        xmlns:local="clr-namespace:Bloxstrap.UI.Elements.Dialogs"
-        xmlns:base="clr-namespace:Bloxstrap.UI.Elements.Base"
-        xmlns:models="clr-namespace:Bloxstrap.UI.ViewModels"
-        xmlns:resources="clr-namespace:Bloxstrap.Resources"
+        xmlns:local="clr-namespace:LumenRX.UI.Elements.Dialogs"
+        xmlns:base="clr-namespace:LumenRX.UI.Elements.Base"
+        xmlns:models="clr-namespace:LumenRX.UI.ViewModels"
+        xmlns:resources="clr-namespace:LumenRX.Resources"
         mc:Ignorable="d"
-        Title="Bloxstrap"
+        Title="Lumen RX"
         MinWidth="0"
         MinHeight="0"
         Width="580"
@@ -24,7 +24,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ui:TitleBar Grid.Row="0" Grid.ColumnSpan="2" Padding="8" ShowMinimize="False" ShowMaximize="False" Title="Bloxstrap" Icon="pack://application:,,,/Bloxstrap.ico" CanMaximize="False" KeyboardNavigation.TabNavigation="None" />
+        <ui:TitleBar Grid.Row="0" Grid.ColumnSpan="2" Padding="8" ShowMinimize="False" ShowMaximize="False" Title="Lumen RX" Icon="pack://application:,,,/Bloxstrap.ico" CanMaximize="False" KeyboardNavigation.TabNavigation="None" />
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -46,7 +46,7 @@
 
                     <Image Grid.Column="0" Width="64" Height="64" Source="pack://application:,,,/Bloxstrap.ico" RenderOptions.BitmapScalingMode="HighQuality" />
                     <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
-                        <TextBlock Text="Bloxstrap" FontSize="24" />
+                        <TextBlock Text="Lumen RX" FontSize="24" />
                         <TextBlock Text="{Binding Version, Mode=OneTime}" VerticalAlignment="Bottom" FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                     </StackPanel>
                 </Grid>

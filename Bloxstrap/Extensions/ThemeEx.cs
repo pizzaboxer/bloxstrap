@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
 
-namespace Bloxstrap.Extensions
+namespace LumenRX.Extensions
 {
     public static class ThemeEx
     {

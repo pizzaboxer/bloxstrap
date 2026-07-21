@@ -11,11 +11,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Bloxstrap.UI.ViewModels.Dialogs;
-using Bloxstrap.UI.ViewModels.Installer;
+using LumenRX.UI.ViewModels.Dialogs;
+using LumenRX.UI.ViewModels.Installer;
 using Wpf.Ui.Mvvm.Interfaces;
 
-namespace Bloxstrap.UI.Elements.Dialogs
+namespace LumenRX.UI.Elements.Dialogs
 {
     /// <summary>
     /// Interaction logic for UninstallerDialog.xaml

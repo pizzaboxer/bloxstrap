@@ -2,11 +2,11 @@
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 
-using Bloxstrap.Resources;
+using LumenRX.Resources;
 
 using Microsoft.Win32;
 
-namespace Bloxstrap.UI.ViewModels.Installer
+namespace LumenRX.UI.ViewModels.Installer
 {
     public class CompletionViewModel
     {

@@ -1,8 +1,8 @@
-﻿using Bloxstrap.AppData;
-using Bloxstrap.Integrations;
-using Bloxstrap.Models;
+﻿using LumenRX.AppData;
+using LumenRX.Integrations;
+using LumenRX.Models;
 
-namespace Bloxstrap
+namespace LumenRX
 {
     public class Watcher : IDisposable
     {

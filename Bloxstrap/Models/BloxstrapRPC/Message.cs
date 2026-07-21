@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Models.BloxstrapRPC;
+﻿namespace LumenRX.Models.BloxstrapRPC;
 
 public class Message
 {

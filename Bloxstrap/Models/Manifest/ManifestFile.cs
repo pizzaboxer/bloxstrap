@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Models.Manifest
+﻿namespace LumenRX.Models.Manifest
 {
     public class ManifestFile
     {

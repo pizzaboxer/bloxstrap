@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Xml.Linq;
 
-namespace Bloxstrap.UI.Converters
+namespace LumenRX.UI.Converters
 {
     class EnumNameConverter : IValueConverter
     {

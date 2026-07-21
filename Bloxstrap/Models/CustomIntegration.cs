@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Models
+﻿namespace LumenRX.Models
 {
     public class CustomIntegration
     {

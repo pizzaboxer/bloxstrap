@@ -1,4 +1,4 @@
-﻿using Bloxstrap.UI.ViewModels;
+﻿using LumenRX.UI.ViewModels;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Markup;
@@ -8,7 +8,7 @@ using Markdig.Syntax.Inlines;
 using Markdig;
 using System.Windows.Media;
 
-namespace Bloxstrap.UI.Elements.Controls
+namespace LumenRX.UI.Elements.Controls
 {
     /// <summary>
     /// TextBlock with markdown support.

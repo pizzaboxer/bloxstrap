@@ -1,4 +1,4 @@
-namespace Bloxstrap.Models.APIs
+namespace LumenRX.Models.APIs
 {
     public class IPInfoResponse
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Bloxstrap.Utility
+namespace LumenRX.Utility
 {
     internal static class Filesystem
     {

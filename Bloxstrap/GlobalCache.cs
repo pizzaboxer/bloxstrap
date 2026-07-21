@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap
+﻿namespace LumenRX
 {
     public static class GlobalCache
     {

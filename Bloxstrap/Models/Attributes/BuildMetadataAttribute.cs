@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Models.Attributes
+﻿namespace LumenRX.Models.Attributes
 {
     [AttributeUsage(AttributeTargets.Assembly)]
     public class BuildMetadataAttribute : Attribute

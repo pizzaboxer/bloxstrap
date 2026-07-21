@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Integrations
+﻿namespace LumenRX.Integrations
 {
     public class ActivityWatcher : IDisposable
     {

@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Enums
+﻿namespace LumenRX.Enums
 {
     public enum CustomThemeTemplate
     {

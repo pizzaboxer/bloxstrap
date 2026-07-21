@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bloxstrap.Models.Attributes
+namespace LumenRX.Models.Attributes
 {
     class EnumSortAttribute : Attribute
     {

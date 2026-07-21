@@ -1,6 +1,6 @@
-﻿using Bloxstrap.RobloxInterfaces;
+﻿using LumenRX.RobloxInterfaces;
 
-namespace Bloxstrap.Models.Manifest
+namespace LumenRX.Models.Manifest
 {
     public class FileManifest : List<ManifestFile>
     {

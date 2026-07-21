@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using Bloxstrap.Resources;
+using LumenRX.Resources;
 
-namespace Bloxstrap.Utility
+namespace LumenRX.Utility
 {
     internal static class Shortcut
     {

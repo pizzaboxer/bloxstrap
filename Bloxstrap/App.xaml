@@ -1,9 +1,9 @@
-﻿<Application x:Class="Bloxstrap.App"
+﻿<Application x:Class="LumenRX.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Bloxstrap"
+             xmlns:local="clr-namespace:LumenRX"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             xmlns:converters="clr-namespace:Bloxstrap.UI.Converters"
+             xmlns:converters="clr-namespace:LumenRX.UI.Converters"
              ShutdownMode="OnExplicitShutdown"
              DispatcherUnhandledException="GlobalExceptionHandler">
     <Application.Resources>

@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.UI.Elements.About.Pages
+﻿namespace LumenRX.UI.Elements.About.Pages
 {
     /// <summary>
     /// Interaction logic for LicensesPage.xaml

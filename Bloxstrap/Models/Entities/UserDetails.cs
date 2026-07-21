@@ -1,6 +1,6 @@
-﻿using Bloxstrap.Models.RobloxApi;
+﻿using LumenRX.Models.RobloxApi;
 
-namespace Bloxstrap.Models.Entities
+namespace LumenRX.Models.Entities
 {
     public class UserDetails
     {

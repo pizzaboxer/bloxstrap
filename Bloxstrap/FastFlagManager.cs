@@ -1,6 +1,6 @@
-﻿using Bloxstrap.Enums.FlagPresets;
+﻿using LumenRX.Enums.FlagPresets;
 
-namespace Bloxstrap
+namespace LumenRX
 {
     public class FastFlagManager : JsonManager<Dictionary<string, object>>
     {

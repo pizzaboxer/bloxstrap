@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
 
-namespace Bloxstrap.Utility
+namespace LumenRX.Utility
 {
     static class WindowsRegistry
     {

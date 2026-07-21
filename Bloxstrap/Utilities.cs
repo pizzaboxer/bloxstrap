@@ -1,7 +1,7 @@
-﻿using Bloxstrap.AppData;
+﻿using LumenRX.AppData;
 using System.ComponentModel;
 
-namespace Bloxstrap
+namespace LumenRX
 {
     static class Utilities
     {
@@ -150,7 +150,7 @@ namespace Bloxstrap
 
         public static void KillBackgroundUpdater()
         {
-            using EventWaitHandle handle = new EventWaitHandle(false, EventResetMode.AutoReset, "Bloxstrap-BackgroundUpdaterKillEvent");
+            using EventWaitHandle handle = new EventWaitHandle(false, EventResetMode.AutoReset, "LumenRX-BackgroundUpdaterKillEvent");
             handle.Set();
         }
     }

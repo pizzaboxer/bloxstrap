@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Utility
+﻿namespace LumenRX.Utility
 {
     internal static class Http
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Bloxstrap.UI.ViewModels.Dialogs
+namespace LumenRX.UI.ViewModels.Dialogs
 {
     internal class AddCustomThemeViewModel : NotifyPropertyChangedViewModel
     {

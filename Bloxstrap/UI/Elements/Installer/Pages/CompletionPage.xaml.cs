@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using Bloxstrap.UI.ViewModels.Installer;
+using LumenRX.UI.ViewModels.Installer;
 
-namespace Bloxstrap.UI.Elements.Installer.Pages
+namespace LumenRX.UI.Elements.Installer.Pages
 {
     /// <summary>
     /// Interaction logic for CompletionPage.xaml

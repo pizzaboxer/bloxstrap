@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Models.APIs.GitHub
+﻿namespace LumenRX.Models.APIs.GitHub
 {
     public class GithubRelease
     {

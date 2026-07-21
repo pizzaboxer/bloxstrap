@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.AppData
+﻿namespace LumenRX.AppData
 {
     public class RobloxPlayerData : CommonAppData, IAppData
     {

@@ -1,9 +1,9 @@
-﻿using Bloxstrap.UI.ViewModels.About;
+﻿using LumenRX.UI.ViewModels.About;
 
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
-namespace Bloxstrap.UI.Elements.About.Pages
+namespace LumenRX.UI.Elements.About.Pages
 {
     /// <summary>
     /// Interaction logic for AboutPage.xaml

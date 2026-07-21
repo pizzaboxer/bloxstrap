@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Bloxstrap
+namespace LumenRX
 {
     static class Resource
     {

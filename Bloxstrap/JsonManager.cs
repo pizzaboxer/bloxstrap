@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap
+﻿namespace LumenRX
 {
     public class JsonManager<T> where T : class, new()
     {

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Bloxstrap.Extensions
+namespace LumenRX.Extensions
 {
     static class BootstrapperIconEx
     {

@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.UI.ViewModels.Settings
+﻿namespace LumenRX.UI.ViewModels.Settings
 {
     public class ShortcutsViewModel : NotifyPropertyChangedViewModel
     {

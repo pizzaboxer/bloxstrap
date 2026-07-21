@@ -2,7 +2,7 @@
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
-namespace Bloxstrap.UI.Elements.About
+namespace LumenRX.UI.Elements.About
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

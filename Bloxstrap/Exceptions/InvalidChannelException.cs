@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Exceptions
+﻿namespace LumenRX.Exceptions
 {
     public class InvalidChannelException : Exception
     {

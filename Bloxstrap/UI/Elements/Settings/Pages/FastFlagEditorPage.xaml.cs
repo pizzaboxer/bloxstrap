@@ -5,11 +5,11 @@ using System.Collections.ObjectModel;
 
 using Wpf.Ui.Mvvm.Contracts;
 
-using Bloxstrap.UI.Elements.Dialogs;
+using LumenRX.UI.Elements.Dialogs;
 using Newtonsoft.Json.Linq;
 using System.Xml.Linq;
 
-namespace Bloxstrap.UI.Elements.Settings.Pages
+namespace LumenRX.UI.Elements.Settings.Pages
 {
     /// <summary>
     /// Interaction logic for FastFlagEditorPage.xaml

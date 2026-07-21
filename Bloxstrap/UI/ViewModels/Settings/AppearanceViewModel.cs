@@ -8,11 +8,11 @@ using ICSharpCode.SharpZipLib.Zip;
 
 using Microsoft.Win32;
 
-using Bloxstrap.UI.Elements.Settings;
-using Bloxstrap.UI.Elements.Editor;
-using Bloxstrap.UI.Elements.Dialogs;
+using LumenRX.UI.Elements.Settings;
+using LumenRX.UI.Elements.Editor;
+using LumenRX.UI.Elements.Dialogs;
 
-namespace Bloxstrap.UI.ViewModels.Settings
+namespace LumenRX.UI.ViewModels.Settings
 {
     public class AppearanceViewModel : NotifyPropertyChangedViewModel
     {

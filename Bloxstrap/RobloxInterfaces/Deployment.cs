@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.RobloxInterfaces
+﻿namespace LumenRX.RobloxInterfaces
 {
     public static class Deployment
     {

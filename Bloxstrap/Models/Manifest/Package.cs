@@ -4,7 +4,7 @@
  * Copyright (c) 2015-present MaximumADHD
 */
 
-namespace Bloxstrap.Models.Manifest
+namespace LumenRX.Models.Manifest
 {
     public class Package
     {

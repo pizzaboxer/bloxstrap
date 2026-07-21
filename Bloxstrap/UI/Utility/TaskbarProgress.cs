@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Windows.Shell;
 
-namespace Bloxstrap.UI.Utility
+namespace LumenRX.UI.Utility
 {
     // Modified from https://github.com/PowerShell/PSReadLine/blob/e9122d38e932614393ff61faf57d6518990d7226/PSReadLine/PlatformWindows.cs#L704
     internal static class TaskbarProgress

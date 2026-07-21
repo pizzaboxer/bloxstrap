@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Enums
+﻿namespace LumenRX.Enums
 {
     // https://learn.microsoft.com/en-us/windows/win32/msi/error-codes
     // https://i-logic.com/serial/errorcodes.htm

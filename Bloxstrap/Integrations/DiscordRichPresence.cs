@@ -1,8 +1,8 @@
 using System.Windows;
-using Bloxstrap.Models.RobloxApi;
+using LumenRX.Models.RobloxApi;
 using DiscordRPC;
 
-namespace Bloxstrap.Integrations
+namespace LumenRX.Integrations
 {
     public class DiscordRichPresence : IDisposable
     {

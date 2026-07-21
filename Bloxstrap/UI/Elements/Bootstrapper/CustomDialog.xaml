@@ -1,13 +1,13 @@
 ﻿<base:WpfUiWindow
-    x:Class="Bloxstrap.UI.Elements.Bootstrapper.CustomDialog"
+    x:Class="LumenRX.UI.Elements.Bootstrapper.CustomDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:base="clr-namespace:Bloxstrap.UI.Elements.Base"
+    xmlns:base="clr-namespace:LumenRX.UI.Elements.Base"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Bloxstrap.UI.Elements.Bootstrapper"
+    xmlns:local="clr-namespace:LumenRX.UI.Elements.Bootstrapper"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Bloxstrap"
+    Title="Lumen RX"
     Width="800"
     Height="450"
     MinWidth="150"
@@ -40,7 +40,7 @@
 
             <ui:TitleBar
                 x:Name="RootTitleBar"
-                Title="Bloxstrap"
+                Title="Lumen RX"
                 Grid.Row="0"
                 Padding="8"
                 Panel.ZIndex="1001"

@@ -2,11 +2,11 @@
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 
-namespace Bloxstrap.UI.ViewModels.Installer
+namespace LumenRX.UI.ViewModels.Installer
 {
     public class InstallViewModel : NotifyPropertyChangedViewModel
     {
-        private readonly Bloxstrap.Installer installer = new();
+        private readonly LumenRX.Installer installer = new();
 
         private readonly string _originalInstallLocation;
 

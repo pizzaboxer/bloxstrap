@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Models.RobloxApi
+﻿namespace LumenRX.Models.RobloxApi
 {
     /// <summary>
     /// Roblox.Users.Api.GetUserResponse

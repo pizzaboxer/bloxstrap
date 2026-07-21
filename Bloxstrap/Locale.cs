@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Bloxstrap
+namespace LumenRX
 {
     internal static class Locale
     {

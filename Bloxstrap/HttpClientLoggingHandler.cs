@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap
+﻿namespace LumenRX
 {
     internal class HttpClientLoggingHandler : MessageProcessingHandler
     {

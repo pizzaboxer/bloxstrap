@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 
-using Bloxstrap.UI.ViewModels.About;
+using LumenRX.UI.ViewModels.About;
 
-namespace Bloxstrap.UI.Elements.About.Pages
+namespace LumenRX.UI.Elements.About.Pages
 {
     /// <summary>
     /// Interaction logic for SupportersPage.xaml

@@ -1,13 +1,13 @@
-<base:WpfUiWindow x:Class="Bloxstrap.UI.Elements.Settings.MainWindow"
+<base:WpfUiWindow x:Class="LumenRX.UI.Elements.Settings.MainWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:pages="clr-namespace:Bloxstrap.UI.Elements.Settings.Pages"
+             xmlns:pages="clr-namespace:LumenRX.UI.Elements.Settings.Pages"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             xmlns:base="clr-namespace:Bloxstrap.UI.Elements.Base"
-             xmlns:resources="clr-namespace:Bloxstrap.Resources"
-             xmlns:dmodels="clr-namespace:Bloxstrap.UI.ViewModels.Settings"
+             xmlns:base="clr-namespace:LumenRX.UI.Elements.Base"
+             xmlns:resources="clr-namespace:LumenRX.Resources"
+             xmlns:dmodels="clr-namespace:LumenRX.UI.ViewModels.Settings"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance dmodels:MainWindowViewModel, IsDesignTimeCreatable=True}"
              Title="{x:Static resources:Strings.Menu_Title}"
@@ -63,7 +63,7 @@
                     <ui:NavigationItem Content="{x:Static resources:Strings.Menu_FastFlagEditor_Title}" PageType="{x:Type pages:FastFlagEditorPage}" Tag="fastflageditor" Visibility="Collapsed" />
                 </ui:NavigationFluent.Items>
                 <ui:NavigationFluent.Footer>
-                    <ui:NavigationItem Content="Bloxstrap" PageType="{x:Type pages:BloxstrapPage}" Icon="Settings24" Tag="shortcuts" />
+                    <ui:NavigationItem Content="Lumen RX" PageType="{x:Type pages:BloxstrapPage}" Icon="Settings24" Tag="shortcuts" />
                     <ui:NavigationItem Content="{x:Static resources:Strings.Menu_About_Title}" Icon="QuestionCircle48" Margin="0,0,0,12" Command="{Binding OpenAboutCommand, Mode=OneTime}" />
                 </ui:NavigationFluent.Footer>
             </ui:NavigationFluent>

@@ -11,9 +11,9 @@ using System.Xml.Linq;
 
 using Wpf.Ui.Markup;
 
-using Bloxstrap.UI.Elements.Controls;
+using LumenRX.UI.Elements.Controls;
 
-namespace Bloxstrap.UI.Elements.Bootstrapper
+namespace LumenRX.UI.Elements.Bootstrapper
 {
     public partial class CustomDialog
     {
@@ -401,7 +401,7 @@ namespace Bloxstrap.UI.Elements.Bootstrapper
             dialog.Margin = new Thickness(0, 0, 0, 0);
             dialog.Padding = new Thickness(0, 0, 0, 0);
 
-            string? title = xmlElement.Attribute("Title")?.Value?.ToString() ?? "Bloxstrap";
+            string? title = xmlElement.Attribute("Title")?.Value?.ToString() ?? "Lumen RX";
             dialog.Title = title;
 
             bool ignoreTitleBarInset = ParseXmlAttribute<bool>(xmlElement, "IgnoreTitleBarInset", false);
@@ -443,7 +443,7 @@ namespace Bloxstrap.UI.Elements.Bootstrapper
             dialog.RootTitleBar.ShowMinimize = ParseXmlAttribute<bool>(xmlElement, "ShowMinimize", true);
             dialog.RootTitleBar.ShowClose = ParseXmlAttribute<bool>(xmlElement, "ShowClose", true);
 
-            string? title = xmlElement.Attribute("Title")?.Value?.ToString() ?? "Bloxstrap";
+            string? title = xmlElement.Attribute("Title")?.Value?.ToString() ?? "Lumen RX";
             dialog.RootTitleBar.Title = title;
 
             return new DummyFrameworkElement(); // dont add anything

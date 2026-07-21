@@ -1,7 +1,7 @@
-﻿using Bloxstrap.Models.Entities;
-using Bloxstrap.Models.SettingTasks.Base;
+﻿using LumenRX.Models.Entities;
+using LumenRX.Models.SettingTasks.Base;
 
-namespace Bloxstrap.Models.SettingTasks
+namespace LumenRX.Models.SettingTasks
 {
     public class ModPresetTask : BoolBaseTask
     {

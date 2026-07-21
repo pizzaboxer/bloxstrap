@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Models.Persistable
+﻿namespace LumenRX.Models.Persistable
 {
     public class RobloxState
     {

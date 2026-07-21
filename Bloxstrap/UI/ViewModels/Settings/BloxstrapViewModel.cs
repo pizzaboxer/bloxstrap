@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.Win32;
 
-namespace Bloxstrap.UI.ViewModels.Settings
+namespace LumenRX.UI.ViewModels.Settings
 {
     public class BloxstrapViewModel : NotifyPropertyChangedViewModel
     {
@@ -42,7 +42,7 @@ namespace Bloxstrap.UI.ViewModels.Settings
 
             var dialog = new SaveFileDialog 
             { 
-                FileName = $"Bloxstrap-export-{timestamp}.zip",
+                FileName = $"LumenRX-export-{timestamp}.zip",
                 Filter = $"{Strings.FileTypes_ZipArchive}|*.zip" 
             };
 

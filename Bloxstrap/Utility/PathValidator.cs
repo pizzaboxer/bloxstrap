@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bloxstrap.Utility
+namespace LumenRX.Utility
 {
     internal static class PathValidator
     {
