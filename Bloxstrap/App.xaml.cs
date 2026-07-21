@@ -187,37 +187,17 @@ namespace Bloxstrap
             return null;
         }
 
-        public static async void SendStat(string key, string value)
+        // Telemetry has been neutralised in this build.
+        // These remain as friendly, local-only no-ops so every caller still works,
+        // but no usage stats or logs are ever sent off this device.
+        public static void SendStat(string key, string value)
         {
-            if (!Settings.Prop.EnableAnalytics)
-                return;
-
-            try
-            {
-                await HttpClient.GetAsync($"https://{WebUrl}/metrics/post?key={key}&value={value}");
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteException("App::SendStat", ex);
-            }
+            Logger.WriteLine("App::SendStat", $"Telemetry disabled; not sending {key}={value}");
         }
 
-        public static async void SendLog()
+        public static void SendLog()
         {
-            if (!Settings.Prop.EnableAnalytics || !CanSendLogs())
-                return;
-
-            try
-            {
-                await HttpClient.PostAsync(
-                    $"https://{WebUrl}/metrics/post-exception", 
-                    new StringContent(Logger.AsDocument)
-                );
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteException("App::SendLog", ex);
-            }
+            Logger.WriteLine("App::SendLog", "Telemetry disabled; not sending exception log");
         }
 
         public static void AssertWindowsOSVersion()
