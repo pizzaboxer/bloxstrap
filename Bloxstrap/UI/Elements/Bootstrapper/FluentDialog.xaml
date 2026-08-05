@@ -1,4 +1,4 @@
-﻿<base:WpfUiWindow
+﻿<base:BootstrapperWpfUiWindow
     x:Class="Bloxstrap.UI.Elements.Bootstrapper.FluentDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -81,4 +81,4 @@
                 IsEnabled="{Binding CancelEnabled, Mode=OneWay}" />
         </Grid>
     </Grid>
-</base:WpfUiWindow>
+</base:BootstrapperWpfUiWindow>

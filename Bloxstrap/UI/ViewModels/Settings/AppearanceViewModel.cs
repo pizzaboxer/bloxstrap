@@ -84,6 +84,12 @@ namespace Bloxstrap.UI.ViewModels.Settings
             set => App.Settings.Prop.Locale = Locale.GetIdentifierFromName(value);
         }
 
+        public Theme BootstrapperTheme
+        {
+            get => App.Settings.Prop.BootstrapperTheme;
+            set => App.Settings.Prop.BootstrapperTheme = value;
+        }
+
         public IEnumerable<BootstrapperStyle> Dialogs { get; } = BootstrapperStyleEx.Selections;
 
         public BootstrapperStyle Dialog

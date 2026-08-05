@@ -2330,6 +2330,15 @@ namespace Bloxstrap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bootstrapper Theme.
+        /// </summary>
+        public static string Menu_Appearance_Bootstrapper_Theme_Title {
+            get {
+                return ResourceManager.GetString("Menu.Appearance.Bootstrapper.Theme.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure other miscellaneous customisable options..
         /// </summary>
         public static string Menu_Appearance_Customisation_Description {

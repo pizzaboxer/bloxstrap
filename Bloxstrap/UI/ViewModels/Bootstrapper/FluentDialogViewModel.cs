@@ -26,7 +26,7 @@ namespace Bloxstrap.UI.ViewModels.Bootstrapper
 
             if (aero)
             {
-                BackgroundColourBrush = App.Settings.Prop.Theme.GetFinal() == Enums.Theme.Light ?
+                BackgroundColourBrush = App.Settings.Prop.BootstrapperTheme.GetFinal() == Enums.Theme.Light ?
                     new SolidColorBrush(Color.FromArgb(alpha, 225, 225, 225)) :
                     new SolidColorBrush(Color.FromArgb(alpha, 30, 30, 30));
             }

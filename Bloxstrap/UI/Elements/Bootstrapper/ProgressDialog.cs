@@ -43,7 +43,7 @@ namespace Bloxstrap.UI.Elements.Bootstrapper
         {
             InitializeComponent();
 
-            if (App.Settings.Prop.Theme.GetFinal() == Theme.Dark)
+            if (App.Settings.Prop.BootstrapperTheme.GetFinal() == Theme.Dark)
             {
                 this.labelMessage.ForeColor = SystemColors.Window;
                 this.buttonCancel.ForeColor = Color.FromArgb(196, 197, 196);
@@ -64,7 +64,7 @@ namespace Bloxstrap.UI.Elements.Bootstrapper
 
         private void ButtonCancel_MouseEnter(object sender, EventArgs e)
         {
-            if (App.Settings.Prop.Theme.GetFinal() == Theme.Dark)
+            if (App.Settings.Prop.BootstrapperTheme.GetFinal() == Theme.Dark)
             {
                 this.buttonCancel.Image = Properties.Resources.DarkCancelButtonHover;
             }
@@ -76,7 +76,7 @@ namespace Bloxstrap.UI.Elements.Bootstrapper
 
         private void ButtonCancel_MouseLeave(object sender, EventArgs e)
         {
-            if (App.Settings.Prop.Theme.GetFinal() == Theme.Dark)
+            if (App.Settings.Prop.BootstrapperTheme.GetFinal() == Theme.Dark)
             {
                 this.buttonCancel.Image = Properties.Resources.DarkCancelButton;
             }

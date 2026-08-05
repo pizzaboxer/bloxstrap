@@ -110,7 +110,7 @@ namespace Bloxstrap.UI.Elements.Bootstrapper
             Title = App.Settings.Prop.BootstrapperTitle;
             Icon = App.Settings.Prop.BootstrapperIcon.GetIcon().GetImageSource();
 
-            if (App.Settings.Prop.Theme.GetFinal() == Theme.Light)
+            if (App.Settings.Prop.BootstrapperTheme.GetFinal() == Theme.Light)
             {
                 // Matching the roblox website light theme as close as possible.
                 _viewModel.DialogBorder = new Thickness(1);

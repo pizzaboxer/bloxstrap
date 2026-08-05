@@ -5,6 +5,7 @@ namespace Bloxstrap.Models.Persistable
     public class Settings
     {
         // bloxstrap configuration
+        public Theme BootstrapperTheme { get; set; } = Theme.Default;
         public BootstrapperStyle BootstrapperStyle { get; set; } = BootstrapperStyle.FluentDialog;
         public BootstrapperIcon BootstrapperIcon { get; set; } = BootstrapperIcon.IconBloxstrap;
         public string BootstrapperTitle { get; set; } = App.ProjectName;

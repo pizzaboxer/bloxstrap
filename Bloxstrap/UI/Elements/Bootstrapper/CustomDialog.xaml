@@ -1,4 +1,4 @@
-﻿<base:WpfUiWindow
+﻿<base:BootstrapperWpfUiWindow
     x:Class="Bloxstrap.UI.Elements.Bootstrapper.CustomDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -52,4 +52,4 @@
             <Grid x:Name="ElementGrid" Grid.Row="1" />
         </Grid>
     </Grid>
-</base:WpfUiWindow>
+</base:BootstrapperWpfUiWindow>
