@@ -123,6 +123,19 @@
             return location;
         }
 
+        public static List<string> GetLocations(string resource)
+        {
+            var locations = new List<string> { GetLocation(resource) };
+
+            locations.AddRange(
+                BaseUrls.Keys
+                    .Where(x => x != BaseUrl)
+                    .Select(x => $"{x}/channel/common{resource}")
+            );
+
+            return locations;
+        }
+        
         public static async Task<ClientVersion> GetInfo(string? channel = null)
         {
             const string LOG_IDENT = "Deployment::GetInfo";
