@@ -1480,7 +1480,13 @@ namespace Bloxstrap
 
             Directory.CreateDirectory(Paths.Downloads);
 
-            string packageUrl = Deployment.GetLocation($"/{_latestVersionGuid}-{package.Name}");
+            List<string> packageUrls = Deployment.GetLocations($"/{_latestVersionGuid}-{package.Name}");
+
+            // Keep the existing HTTP fallback, but only try it after all HTTPS mirrors.
+            packageUrls.Add(packageUrls[0].Replace("https://", "http://"));
+
+            string packageUrl = packageUrls[0];
+            int packageUrlIndex = 0;
             string robloxPackageLocation = Path.Combine(Paths.LocalAppData, "Roblox", "Downloads", package.Signature);
 
             if (File.Exists(package.DownloadPath))
@@ -1524,7 +1530,7 @@ namespace Bloxstrap
             if (File.Exists(package.DownloadPath))
                 return;
 
-            const int maxTries = 5;
+            int maxTries = packageUrls.Count;
 
             App.Logger.WriteLine(LOG_IDENT, "Downloading...");
 
@@ -1540,6 +1546,7 @@ namespace Bloxstrap
                 try
                 {
                     var response = await App.HttpClient.GetAsync(packageUrl, HttpCompletionOption.ResponseHeadersRead, _cancelTokenSource.Token);
+                    response.EnsureSuccessStatusCode();
                     await using var stream = await response.Content.ReadAsStreamAsync(_cancelTokenSource.Token);
                     await using var fileStream = new FileStream(package.DownloadPath, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.Delete);
 
@@ -1600,13 +1607,12 @@ namespace Bloxstrap
                     _totalDownloadedBytes -= totalBytesRead;
                     UpdateProgressBar();
 
-                    // attempt download over HTTP
-                    // this isn't actually that unsafe - signatures were fetched earlier over HTTPS
-                    // so we've already established that our signatures are legit, and that there's very likely no MITM anyway
-                    if (ex.GetType() == typeof(IOException) && !packageUrl.StartsWith("http://"))
+                    if ((ex is IOException or HttpRequestException) && packageUrlIndex + 1 < packageUrls.Count)
                     {
-                        App.Logger.WriteLine(LOG_IDENT, "Retrying download over HTTP...");
-                        packageUrl = packageUrl.Replace("https://", "http://");
+                        packageUrlIndex++;
+                        packageUrl = packageUrls[packageUrlIndex];
+
+                        App.Logger.WriteLine(LOG_IDENT, $"Retrying download from alternate mirror '{packageUrl}'...");
                     }
                 }
             }
