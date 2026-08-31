@@ -1452,28 +1452,29 @@ namespace Bloxstrap
             return success;
         }
         private bool TryValidatePackage(Package package, string filePath, string logIdent)
-{
-    try
-    {
-        string calculatedMD5 = MD5Hash.FromFile(filePath);
+        {
+            try
+            {
+                string calculatedMD5 = MD5Hash.FromFile(filePath);
 
-        if (calculatedMD5 == package.Signature)
-            return true;
+                if (calculatedMD5 == package.Signature)
+                    return true;
 
-        App.Logger.WriteLine(logIdent, $"Package is corrupted ({calculatedMD5} != {package.Signature})!");
-    }
-    catch (IOException ex)
-    {
-        App.Logger.WriteLine(logIdent, $"Failed to validate package at '{filePath}'; treating it as corrupted");
-        App.Logger.WriteException(logIdent, ex);
-    }
+                App.Logger.WriteLine(logIdent, $"Package is corrupted ({calculatedMD5} != {package.Signature})!");
+            }
+            catch (IOException ex)
+            {
+                App.Logger.WriteLine(logIdent, $"Failed to validate package at '{filePath}'; treating it as corrupted");
+                App.Logger.WriteException(logIdent, ex);
+            }
 
-    return false;
-}
+            return false;
+        }
+
         private async Task DownloadPackage(Package package)
         {
             string LOG_IDENT = $"Bootstrapper::DownloadPackage.{package.Name}";
-            
+
             if (_cancelTokenSource.IsCancellationRequested)
                 return;
 
@@ -1483,42 +1484,42 @@ namespace Bloxstrap
             string robloxPackageLocation = Path.Combine(Paths.LocalAppData, "Roblox", "Downloads", package.Signature);
 
             if (File.Exists(package.DownloadPath))
-{
-    if (TryValidatePackage(package, package.DownloadPath, LOG_IDENT))
-    {
-        App.Logger.WriteLine(LOG_IDENT, $"Package is already downloaded, skipping...");
+            {
+                if (TryValidatePackage(package, package.DownloadPath, LOG_IDENT))
+                {
+                    App.Logger.WriteLine(LOG_IDENT, $"Package is already downloaded, skipping...");
 
-        _totalDownloadedBytes += package.PackedSize;
-        UpdateProgressBar();
+                    _totalDownloadedBytes += package.PackedSize;
+                    UpdateProgressBar();
 
-        return;
-    }
+                    return;
+                }
 
-    // A damaged cache entry must not abort the whole update. Remove it and
-    // let the normal download path fetch a fresh copy.
-    App.Logger.WriteLine(LOG_IDENT, "Deleting invalid cached package and re-downloading...");
-    File.Delete(package.DownloadPath);
-}
+                // A damaged cache entry must not abort the whole update. Remove it and
+                // let the normal download path fetch a fresh copy.
+                App.Logger.WriteLine(LOG_IDENT, "Deleting invalid cached package and re-downloading...");
+                File.Delete(package.DownloadPath);
+            }
 
-if (File.Exists(robloxPackageLocation))
-{
-    // let's cheat! if the stock bootstrapper already previously downloaded the file,
-    // then we can just copy the one from there
+            if (File.Exists(robloxPackageLocation))
+            {
+                // let's cheat! if the stock bootstrapper already previously downloaded the file,
+                // then we can just copy the one from there
 
-    App.Logger.WriteLine(LOG_IDENT, $"Found existing copy at '{robloxPackageLocation}'! Copying to Downloads folder...");
-    File.Copy(robloxPackageLocation, package.DownloadPath);
+                App.Logger.WriteLine(LOG_IDENT, $"Found existing copy at '{robloxPackageLocation}'! Copying to Downloads folder...");
+                File.Copy(robloxPackageLocation, package.DownloadPath);
 
-    if (TryValidatePackage(package, package.DownloadPath, LOG_IDENT))
-    {
-        _totalDownloadedBytes += package.PackedSize;
-        UpdateProgressBar();
+                if (TryValidatePackage(package, package.DownloadPath, LOG_IDENT))
+                {
+                    _totalDownloadedBytes += package.PackedSize;
+                    UpdateProgressBar();
 
-        return;
-    }
+                    return;
+                }
 
-    App.Logger.WriteLine(LOG_IDENT, "The existing Roblox cache copy is invalid; deleting it and downloading again...");
-    File.Delete(package.DownloadPath);
-}
+                App.Logger.WriteLine(LOG_IDENT, "The existing Roblox cache copy is invalid; deleting it and downloading again...");
+                File.Delete(package.DownloadPath);
+            }
 
             if (File.Exists(package.DownloadPath))
                 return;
