@@ -1451,7 +1451,7 @@ namespace Bloxstrap
 
             return success;
         }
-private bool TryValidatePackage(Package package, string filePath, string logIdent)
+        private bool TryValidatePackage(Package package, string filePath, string logIdent)
 {
     try
     {
