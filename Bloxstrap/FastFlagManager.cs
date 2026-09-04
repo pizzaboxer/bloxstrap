@@ -130,9 +130,18 @@ namespace Bloxstrap
         public override void Save()
         {
             // convert all flag values to strings before saving
+            // null values can exist in hand-edited or older flag files;
+            // a null value means that the flag should be removed.
 
-            foreach (var pair in Prop)
-                Prop[pair.Key] = pair.Value.ToString()!;
+            foreach (string key in Prop.Keys.ToArray())
+            {
+                object? value = Prop[key];
+
+                if (value is null)
+                    Prop.Remove(key);
+                else
+                    Prop[key] = value.ToString();
+            }
 
             base.Save();
 
