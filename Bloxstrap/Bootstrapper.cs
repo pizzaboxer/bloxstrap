@@ -1451,31 +1451,47 @@ namespace Bloxstrap
 
             return success;
         }
+        private bool TryValidatePackage(Package package, string filePath, string logIdent)
+        {
+            try
+            {
+                string calculatedMD5 = MD5Hash.FromFile(filePath);
+
+                if (calculatedMD5 == package.Signature)
+                    return true;
+
+                App.Logger.WriteLine(logIdent, $"Package is corrupted ({calculatedMD5} != {package.Signature})!");
+            }
+            catch (IOException ex)
+            {
+                App.Logger.WriteLine(logIdent, $"Failed to validate package at '{filePath}'; treating it as corrupted");
+                App.Logger.WriteException(logIdent, ex);
+            }
+
+            return false;
+        }
 
         private async Task DownloadPackage(Package package)
         {
             string LOG_IDENT = $"Bootstrapper::DownloadPackage.{package.Name}";
-            
+
             if (_cancelTokenSource.IsCancellationRequested)
                 return;
 
             Directory.CreateDirectory(Paths.Downloads);
 
-            string packageUrl = Deployment.GetLocation($"/{_latestVersionGuid}-{package.Name}");
+            List<string> packageUrls = Deployment.GetLocations($"/{_latestVersionGuid}-{package.Name}");
+
+            // Keep the existing HTTP fallback, but only try it after all HTTPS mirrors.
+            packageUrls.Add(packageUrls[0].Replace("https://", "http://"));
+
+            string packageUrl = packageUrls[0];
+            int packageUrlIndex = 0;
             string robloxPackageLocation = Path.Combine(Paths.LocalAppData, "Roblox", "Downloads", package.Signature);
 
             if (File.Exists(package.DownloadPath))
             {
-                var file = new FileInfo(package.DownloadPath);
-
-                string calculatedMD5 = MD5Hash.FromFile(package.DownloadPath);
-
-                if (calculatedMD5 != package.Signature)
-                {
-                    App.Logger.WriteLine(LOG_IDENT, $"Package is corrupted ({calculatedMD5} != {package.Signature})! Deleting and re-downloading...");
-                    file.Delete();
-                }
-                else
+                if (TryValidatePackage(package, package.DownloadPath, LOG_IDENT))
                 {
                     App.Logger.WriteLine(LOG_IDENT, $"Package is already downloaded, skipping...");
 
@@ -1484,8 +1500,14 @@ namespace Bloxstrap
 
                     return;
                 }
+
+                // A damaged cache entry must not abort the whole update. Remove it and
+                // let the normal download path fetch a fresh copy.
+                App.Logger.WriteLine(LOG_IDENT, "Deleting invalid cached package and re-downloading...");
+                File.Delete(package.DownloadPath);
             }
-            else if (File.Exists(robloxPackageLocation))
+
+            if (File.Exists(robloxPackageLocation))
             {
                 // let's cheat! if the stock bootstrapper already previously downloaded the file,
                 // then we can just copy the one from there
@@ -1493,16 +1515,22 @@ namespace Bloxstrap
                 App.Logger.WriteLine(LOG_IDENT, $"Found existing copy at '{robloxPackageLocation}'! Copying to Downloads folder...");
                 File.Copy(robloxPackageLocation, package.DownloadPath);
 
-                _totalDownloadedBytes += package.PackedSize;
-                UpdateProgressBar();
+                if (TryValidatePackage(package, package.DownloadPath, LOG_IDENT))
+                {
+                    _totalDownloadedBytes += package.PackedSize;
+                    UpdateProgressBar();
 
-                return;
+                    return;
+                }
+
+                App.Logger.WriteLine(LOG_IDENT, "The existing Roblox cache copy is invalid; deleting it and downloading again...");
+                File.Delete(package.DownloadPath);
             }
 
             if (File.Exists(package.DownloadPath))
                 return;
 
-            const int maxTries = 5;
+            int maxTries = packageUrls.Count;
 
             App.Logger.WriteLine(LOG_IDENT, "Downloading...");
 
@@ -1518,6 +1546,7 @@ namespace Bloxstrap
                 try
                 {
                     var response = await App.HttpClient.GetAsync(packageUrl, HttpCompletionOption.ResponseHeadersRead, _cancelTokenSource.Token);
+                    response.EnsureSuccessStatusCode();
                     await using var stream = await response.Content.ReadAsStreamAsync(_cancelTokenSource.Token);
                     await using var fileStream = new FileStream(package.DownloadPath, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.Delete);
 
@@ -1578,13 +1607,12 @@ namespace Bloxstrap
                     _totalDownloadedBytes -= totalBytesRead;
                     UpdateProgressBar();
 
-                    // attempt download over HTTP
-                    // this isn't actually that unsafe - signatures were fetched earlier over HTTPS
-                    // so we've already established that our signatures are legit, and that there's very likely no MITM anyway
-                    if (ex.GetType() == typeof(IOException) && !packageUrl.StartsWith("http://"))
+                    if ((ex is IOException or HttpRequestException) && packageUrlIndex + 1 < packageUrls.Count)
                     {
-                        App.Logger.WriteLine(LOG_IDENT, "Retrying download over HTTP...");
-                        packageUrl = packageUrl.Replace("https://", "http://");
+                        packageUrlIndex++;
+                        packageUrl = packageUrls[packageUrlIndex];
+
+                        App.Logger.WriteLine(LOG_IDENT, $"Retrying download from alternate mirror '{packageUrl}'...");
                     }
                 }
             }
